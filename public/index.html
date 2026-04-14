@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>把天聊下去 · AI 副驾</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ── 顶部工具栏 ─────────────────────────────────── -->
+  <header class="toolbar">
+    <div class="toolbar-left">
+      <h1 class="app-title">🎙️ 把天聊下去</h1>
+      <span class="app-subtitle">直播主持人 AI 副驾</span>
+    </div>
+    <div class="toolbar-center">
+      <div class="audio-source">
+        <label for="audioSource">音频源</label>
+        <select id="audioSource">
+          <option value="default">默认麦克风</option>
+        </select>
+      </div>
+      <button id="btnToggle" class="btn btn-primary" onclick="toggleRecording()">
+        ▶ 开始
+      </button>
+      <label class="btn btn-secondary upload-btn">
+        📁 上传脚本
+        <input type="file" id="fileInput" accept=".txt,.md" hidden onchange="uploadScript(this)">
+      </label>
+      <button class="btn btn-accent" onclick="manualTrigger()">
+        💡 手动追问
+      </button>
+    </div>
+    <div class="toolbar-right">
+      <span id="scriptStatus" class="script-status"></span>
+    </div>
+  </header>
+
+  <!-- ── 主内容区 ────────────────────────────────────── -->
+  <main class="main-content">
+    <!-- 左侧：追问建议 -->
+    <section class="panel panel-suggestions">
+      <div class="panel-header">
+        <h2>💡 AI 追问建议</h2>
+        <span id="suggestionCount" class="badge">0</span>
+      </div>
+      <div id="suggestionsContainer" class="suggestions-list">
+        <div class="empty-state">
+          <p>开始录音后，AI 会根据对话内容自动生成追问建议</p>
+          <p class="hint">也可以随时点击「手动追问」按钮</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 右侧：实时转写 -->
+    <section class="panel panel-transcript">
+      <div class="panel-header">
+        <h2>📝 实时语音转写</h2>
+        <div class="transcript-actions">
+          <span id="charCount" class="badge">0 字</span>
+          <button class="btn-small" onclick="clearTranscript()">清空</button>
+          <button class="btn-small" id="btnScrollLock" onclick="toggleScrollLock()">自动滚动 ✅</button>
+        </div>
+      </div>
+      <div id="transcriptContainer" class="transcript-list">
+        <div class="empty-state">
+          <p>点击「开始」按钮，语音识别后的文字会显示在这里</p>
+          <p class="hint">使用豆包 Seed-ASR 2.0 语音识别大模型</p>
+        </div>
+      </div>
+      <div id="interimText" class="interim-text"></div>
+    </section>
+  </main>
+
+  <!-- ── 底部状态栏 ──────────────────────────────────── -->
+  <footer class="statusbar">
+    <div class="status-left">
+      <span class="status-dot" id="statusDot"></span>
+      <span id="statusText">就绪</span>
+    </div>
+    <div class="status-center">
+      <span id="asrStatus">ASR: 未启动</span>
+      <span class="separator">|</span>
+      <span id="llmStatus">LLM: 待命</span>
+    </div>
+    <div class="status-right">
+      <span id="elapsedTime">⏱ 00:00:00</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
