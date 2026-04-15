@@ -20,6 +20,17 @@
           <option value="default">默认麦克风</option>
         </select>
       </div>
+      <div class="scene-mode">
+        <label for="sceneMode">场景</label>
+        <select id="sceneMode" onchange="onSceneModeChange()">
+          <option value="live-host" selected>🎙️ 直播主持</option>
+          <option value="interview">🎤 访谈采访</option>
+          <option value="recruitment">👔 招聘面试</option>
+          <option value="recording">📹 口播录制</option>
+          <option value="training">📚 培训教学</option>
+          <option value="custom">⚙️ 自定义</option>
+        </select>
+      </div>
       <button id="btnToggle" class="btn btn-primary" onclick="toggleRecording()">
         ▶ 开始
       </button>
@@ -30,6 +41,10 @@
       <button class="btn btn-accent" onclick="manualTrigger()">
         💡 手动追问
       </button>
+    </div>
+    <div id="customPromptRow" class="custom-prompt-row" style="display: none;">
+      <label for="customPrompt">自定义指令</label>
+      <textarea id="customPrompt" class="custom-prompt-input" rows="2" placeholder="输入自定义指令，例如：请用英文追问、侧重技术深度..."></textarea>
     </div>
     <div class="toolbar-right">
       <span id="scriptStatus" class="script-status"></span>

@@ -39,6 +39,9 @@ let lastTriggerTime = 0;
 let isGenerating = false;
 
 // ── DOM 元素 ──────────────────────────────────────────────
+const $sceneMode = document.getElementById('sceneMode');
+const $customPromptRow = document.getElementById('customPromptRow');
+const $customPrompt = document.getElementById('customPrompt');
 const $audioSource = document.getElementById('audioSource');
 const $btnToggle = document.getElementById('btnToggle');
 const $scriptStatus = document.getElementById('scriptStatus');
@@ -65,6 +68,17 @@ async function init() {
     $asrStatus.style.color = '#ef4444';
   } else {
     $asrStatus.textContent = 'ASR: 豆包 Seed-ASR 2.0';
+  }
+}
+
+// ── 场景模式切换 ──────────────────────────────────────────
+function onSceneModeChange() {
+  const mode = $sceneMode.value;
+  if (mode === 'custom') {
+    $customPromptRow.style.display = 'flex';
+    $customPrompt.focus();
+  } else {
+    $customPromptRow.style.display = 'none';
   }
 }
 
@@ -442,7 +456,9 @@ async function generateSuggestions() {
       body: JSON.stringify({
         transcript: fullTranscript.slice(-3000),
         scriptContent: scriptContent || '',
-        previousSummary: ''
+        previousSummary: '',
+        sceneMode: $sceneMode.value,
+        customPrompt: $customPrompt.value || ''
       })
     });
 

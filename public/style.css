@@ -115,6 +115,77 @@ body {
   border-color: var(--accent-blue);
 }
 
+/* ── 场景模式选择 ─────────────────────────────── */
+.scene-mode {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.scene-mode label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.scene-mode select {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  max-width: 200px;
+  outline: none;
+  cursor: pointer;
+}
+
+.scene-mode select:focus {
+  border-color: var(--accent-blue);
+}
+
+/* ── 自定义指令输入 ───────────────────────────── */
+.custom-prompt-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 20px 0;
+  background: var(--bg-secondary);
+}
+
+.custom-prompt-row label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  padding-top: 6px;
+  flex-shrink: 0;
+}
+
+.custom-prompt-input {
+  flex: 1;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  font-family: var(--font-sans);
+  resize: vertical;
+  outline: none;
+  min-height: 36px;
+  max-height: 120px;
+  line-height: 1.5;
+}
+
+.custom-prompt-input:focus {
+  border-color: var(--accent-blue);
+}
+
+.custom-prompt-input::placeholder {
+  color: var(--text-muted);
+}
+
 /* ── 按钮 ─────────────────────────────────────── */
 .btn {
   padding: 7px 16px;
